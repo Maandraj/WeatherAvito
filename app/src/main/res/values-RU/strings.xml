@@ -3,4 +3,5 @@
     <string name="send_me_location">Выберите город</string>
     <string name="save_location">Сохранить</string>
     <string name="error_city_select">Возникла ошибка при выборе города.</string>
+    <string name="please_select_city">Пожалуйста выберите город в ручную</string>
 </resources>

@@ -39,13 +39,11 @@ import java.util.*
 class LocationFragment : Fragment(R.layout.fragment_location),
     EasyPermissions.PermissionCallbacks {
     private val viewBinding: FragmentLocationBinding by viewBinding(FragmentLocationBinding::bind)
-    private val READ_LOCATION_PERMISSION_REQUEST = 123
     private lateinit var autocompleteFragment: AutocompleteSupportFragment
     private val viewModel: LocationViewModel by viewModels()
     private var placeFields: List<Place.Field> = listOf()
 
 
-    @SuppressLint("ResourceAsColor")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         placeFields = listOf(Place.Field.NAME, Place.Field.LAT_LNG)
@@ -67,16 +65,16 @@ class LocationFragment : Fragment(R.layout.fragment_location),
 
         val autocompleteView = autocompleteFragment.requireView()
         autocompleteView.findViewById<View>(R.id.places_autocomplete_clear_button)
-            .setOnClickListener { view -> // example : way to access view from PlaceAutoCompleteFragment
-                // ((EditText) autocompleteFragment.getView()
-                // .findViewById(R.id.place_autocomplete_search_input)).setText("");
+            .setOnClickListener { view ->
                 autocompleteFragment.setText("")
                 view.visibility = View.GONE
                 viewBinding.btnSave.visibility = View.GONE
                 viewModel.setLocation(null, null)
             }
-        val editComplete = autocompleteView.findViewById<EditText>(R.id.places_autocomplete_search_input)
-        editComplete.setTextColor(R.color.white)
+        val editComplete =
+            autocompleteView.findViewById<EditText>(R.id.places_autocomplete_search_input)
+        editComplete.setTextColor(resources.getColor(R.color.white))
+
         viewModel.loadingState.observe(viewLifecycleOwner, {
             viewBinding.progress.root.isVisible = it
         })
@@ -86,20 +84,25 @@ class LocationFragment : Fragment(R.layout.fragment_location),
         })
 
         viewModel.isSelectException.observe(viewLifecycleOwner, {
-            if (!it){
-                Toast.makeText(requireContext(), getString(R.string.error_city_select), Toast.LENGTH_LONG).show()
+            if (!it) {
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.error_city_select),
+                    Toast.LENGTH_LONG
+                ).show()
             }
         })
-        viewBinding.btnSave.setOnClickListener{
 
-            if (LocationCredentials.cityApi != null ){
+        viewBinding.btnSave.setOnClickListener {
+            if (LocationCredentials.cityApi != null) {
                 LocationCredentials.autoSave = false
                 findNavController().setGraph(R.navigation.unsecured_graph)
             }
         }
+
         viewModel.selectPlace.observe(viewLifecycleOwner, {
             lifecycleScope.launch {
-                getPlaceFromId(it.id!!, Locale.US)
+                getPlaceFromId(it.latLng!!.latitude, it.latLng!!.longitude)
             }
         })
 
@@ -110,7 +113,6 @@ class LocationFragment : Fragment(R.layout.fragment_location),
             }
 
             override fun onError(status: Status) {
-
                 viewModel.setSelectionException(status.isSuccess)
                 Log.i("Error", "An error occurred: $status")
             }
@@ -161,6 +163,11 @@ class LocationFragment : Fragment(R.layout.fragment_location),
 
     override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
         Log.e(TAG, "Denied:")
+        Toast.makeText(
+            requireContext(),
+            getString(R.string.please_select_city),
+            Toast.LENGTH_LONG
+        ).show()
     }
 
     private fun openPhotoPicker() {
@@ -173,30 +180,15 @@ class LocationFragment : Fragment(R.layout.fragment_location),
         )
     }
 
-    fun getPlaceFromId(id: String, locale: Locale): Place? {
-        Places.initialize(
-            requireContext(),
-            viewModel.key,
-            locale
-        )
-        val request = FetchPlaceRequest.newInstance(id, placeFields)
-        var place: Place? = null
-        Places.createClient(requireContext()).fetchPlace(request)
-            .addOnSuccessListener { response: FetchPlaceResponse ->
-                place = response.place
-                viewModel.setLocation(place!!.name, viewModel.selectPlace.value!!.name)
-                Places.initialize(
-                    requireContext(),
-                    viewModel.key,
-                    Locale.getDefault()
-                )
-                Log.i("PlaceAPI", "Place found: ${place!!.name}")
+    private fun getPlaceFromId(latitude: Double, longitude: Double) {
+        val geocoderApi = Geocoder(requireContext(), Locale.US)
+        val addresses: Address = geocoderApi.getFromLocation(latitude, longitude, 1)[0]
+        viewModel.setLocation(addresses.locality, viewModel.selectPlace.value!!.name)
 
-            }.addOnFailureListener { exception: Exception ->
-                if (exception is ApiException) {
-                    Log.e("ErrorApi", "Place not found: ${exception.message}")
-                }
-            }
-        return place
+        Log.i("PlaceAPI", "Place found: ${addresses.locality}")
+
     }
-}
+    companion object{
+        const val READ_LOCATION_PERMISSION_REQUEST = 123
+    }
+    }
