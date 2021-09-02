@@ -4,12 +4,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.teachweather.di.LocationCredentials
+import com.example.teachweather.features.location.domain.LocationInteractor
 import com.example.teachweather.utills.asLiveData
 import com.google.android.libraries.places.api.model.Place
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class LocationViewModel @Inject constructor() : ViewModel() {
+@HiltViewModel
+class LocationViewModel @Inject constructor(
+    private val locationInteractor: LocationInteractor
+) : ViewModel() {
     val key = "AIzaSyBIE3HoKztVwwllsNFDBrYF9l8F6ZRbakM"
 
     private val _isSelectException = MutableLiveData<Boolean>()
@@ -26,10 +31,10 @@ class LocationViewModel @Inject constructor() : ViewModel() {
 
     init {
         viewModelScope.launch {
-            if (LocationCredentials.cityUI == null || LocationCredentials.cityApi == null){
+            if (LocationCredentials.cityUI == null || LocationCredentials.cityApi == null) {
                 _loadingState.postValue(true)
                 _successLocation.postValue(false)
-            }else{
+            } else {
                 _loadingState.postValue(false)
                 _successLocation.postValue(true)
 
@@ -37,26 +42,43 @@ class LocationViewModel @Inject constructor() : ViewModel() {
         }
     }
 
-    fun setPlace(place: Place){
-       viewModelScope.launch {
-           _selectPlace.postValue(place)
-       }
-    }
-    fun setLocation(locationApi: String?, locationUi : String?){
+    fun setPlace(place: Place) {
         viewModelScope.launch {
-            _loadingState.postValue(false)
-            LocationCredentials.cityApi = locationApi
-            LocationCredentials.cityUI = locationUi
-            if (LocationCredentials.cityUI == null || LocationCredentials.cityApi == null ){
-                _successLocation.postValue(false)
-                LocationCredentials.cityApi = null
-                LocationCredentials.cityUI = null
-            }else{
-                _successLocation.postValue(true)
-            }
+            _selectPlace.postValue(place)
         }
     }
-    fun setSelectionException(isSuccess : Boolean){
+
+    fun setLocation(
+        locationApi: String? = null,
+        locationUi: String? = null,
+        lat: Double? = null,
+        long: Double? = null
+    ) {
+        viewModelScope.launch {
+            LocationCredentials.cityApi = locationApi
+            LocationCredentials.cityUI = locationUi
+            if (LocationCredentials.cityUI == null || LocationCredentials.cityApi == null) {
+                _successLocation.postValue(false)
+            } else {
+                val city = locationInteractor.getCity(locationUi!!)
+                if (city != null) {
+                    LocationCredentials.autoSave = true
+                    LocationCredentials.keyCity = city.key
+                    LocationCredentials.lat = lat!!.toFloat()
+                    LocationCredentials.long = long!!.toFloat()
+                    _successLocation.postValue(true)
+                }else{
+                    LocationCredentials.cityApi = null
+                    LocationCredentials.cityUI = null
+                    _isSelectException.postValue(false)
+                }
+            }
+            _loadingState.postValue(false)
+
+        }
+    }
+
+    fun setSelectionException(isSuccess: Boolean) {
         viewModelScope.launch {
             _isSelectException.postValue(isSuccess)
         }

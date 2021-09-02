@@ -18,14 +18,11 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.teachweather.R
 import com.example.teachweather.databinding.FragmentLocationBinding
 import com.example.teachweather.di.LocationCredentials
-import com.example.teachweather.features.location.presentation.SettingsDialogFragment.Companion.TAG
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.Status
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.api.model.TypeFilter
-import com.google.android.libraries.places.api.net.FetchPlaceRequest
-import com.google.android.libraries.places.api.net.FetchPlaceResponse
 import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener
@@ -47,7 +44,6 @@ class LocationFragment : Fragment(R.layout.fragment_location),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         placeFields = listOf(Place.Field.NAME, Place.Field.LAT_LNG)
-        LocationCredentials.autoSave = true
         Places.initialize(
             requireContext(),
             viewModel.key,
@@ -59,7 +55,7 @@ class LocationFragment : Fragment(R.layout.fragment_location),
         autocompleteFragment =
             childFragmentManager.findFragmentById(R.id.autocomplete_fragment)
                     as AutocompleteSupportFragment
-        autocompleteFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME))
+        autocompleteFragment.setPlaceFields(listOf(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG))
         autocompleteFragment.setTypeFilter(TypeFilter.CITIES)
         autocompleteFragment.setText(LocationCredentials.cityUI)
 
@@ -69,11 +65,11 @@ class LocationFragment : Fragment(R.layout.fragment_location),
                 autocompleteFragment.setText("")
                 view.visibility = View.GONE
                 viewBinding.btnSave.visibility = View.GONE
-                viewModel.setLocation(null, null)
+                viewModel.setLocation()
             }
         val editComplete =
             autocompleteView.findViewById<EditText>(R.id.places_autocomplete_search_input)
-        editComplete.setTextColor(resources.getColor(R.color.white))
+
 
         viewModel.loadingState.observe(viewLifecycleOwner, {
             viewBinding.progress.root.isVisible = it
@@ -94,15 +90,14 @@ class LocationFragment : Fragment(R.layout.fragment_location),
         })
 
         viewBinding.btnSave.setOnClickListener {
-            if (LocationCredentials.cityApi != null) {
                 LocationCredentials.autoSave = false
                 findNavController().setGraph(R.navigation.unsecured_graph)
-            }
         }
 
         viewModel.selectPlace.observe(viewLifecycleOwner, {
             lifecycleScope.launch {
-                getPlaceFromId(it.latLng!!.latitude, it.latLng!!.longitude)
+
+                setPlaceFromGeo(it.latLng!!.latitude, it.latLng!!.longitude)
             }
         })
 
@@ -144,17 +139,17 @@ class LocationFragment : Fragment(R.layout.fragment_location),
                 )
                 val cityNameUi: String = addresses[0].locality
                 val cityNameApi: String = addresses[1].locality
-                viewModel.setLocation(cityNameApi, cityNameUi)
+                viewModel.setLocation(cityNameApi, cityNameUi, latLng.latitude, latLng.longitude)
                 autocompleteFragment.setText(cityNameUi)
                 Log.i(
-                    TAG,
+                    "Place",
                     "PlaceUI : $cityNameUi, PlaceApi : $cityNameApi"
                 )
 
             } else {
                 val exception = task.exception
                 if (exception is ApiException) {
-                    Log.e(TAG, "Place not found: ${exception.statusCode}")
+                    Log.e("Place", "Place not found: ${exception.statusCode}")
                 }
             }
 
@@ -162,7 +157,8 @@ class LocationFragment : Fragment(R.layout.fragment_location),
     }
 
     override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
-        Log.e(TAG, "Denied:")
+        viewModel.setLocation()
+        Log.e("Place", "Denied")
         Toast.makeText(
             requireContext(),
             getString(R.string.please_select_city),
@@ -174,17 +170,17 @@ class LocationFragment : Fragment(R.layout.fragment_location),
         val permission = Manifest.permission.ACCESS_FINE_LOCATION
         EasyPermissions.requestPermissions(
             this,
-            "Locale",
+            getString(R.string.auto_select_city),
             READ_LOCATION_PERMISSION_REQUEST,
             permission
         )
     }
 
-    private fun getPlaceFromId(latitude: Double, longitude: Double) {
+    private fun setPlaceFromGeo(latitude: Double, longitude: Double) {
         val geocoderApi = Geocoder(requireContext(), Locale.US)
         val addresses: Address = geocoderApi.getFromLocation(latitude, longitude, 1)[0]
-        viewModel.setLocation(addresses.locality, viewModel.selectPlace.value!!.name)
 
+        viewModel.setLocation(addresses.locality, viewModel.selectPlace.value!!.name, latitude,longitude)
         Log.i("PlaceAPI", "Place found: ${addresses.locality}")
 
     }

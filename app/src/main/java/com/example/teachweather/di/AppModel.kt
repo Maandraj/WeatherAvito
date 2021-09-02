@@ -16,12 +16,14 @@ import javax.inject.Singleton
 class AppModel {
     @Provides
     @Singleton
-    fun provideOkHttp(): OkHttpClient =
+    fun provideOkHttp( gzipInterceptor : GzipInterceptor): OkHttpClient =
+
         OkHttpClient.Builder().apply {
             addInterceptor(HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY
             })
-        }.build()
+        }.addInterceptor(gzipInterceptor)
+            .build()
 
     @Provides
     @Singleton
@@ -40,4 +42,4 @@ class AppModel {
         .build()
 }
 
-private const val OPENWEATHERM_API_BASE_URL = "api.openweathermap.org/data/2.5/"
+private const val OPENWEATHERM_API_BASE_URL = "http://dataservice.accuweather.com/"
