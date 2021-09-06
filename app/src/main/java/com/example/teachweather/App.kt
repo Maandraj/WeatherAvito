@@ -9,7 +9,7 @@ import dagger.hilt.android.HiltAndroidApp
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.getDefaultNightMode())
+      //  AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.getDefaultNightMode())
         Kotpref.init(baseContext)
     }
 }

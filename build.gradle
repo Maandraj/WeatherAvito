@@ -1,9 +1,15 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+
+
+
 buildscript {
     repositories {
         google()
         mavenCentral()
+
     }
+
     dependencies {
         def hiltVersion = "2.38.1"
         def navVersion = "2.3.5"

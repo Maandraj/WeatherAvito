@@ -1,0 +1,37 @@
+<svg version="1.2" baseProfile="tiny-ps" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160">
+	<title>&lt;Group&gt;</title>
+	<defs>
+		<linearGradient id="grd1" gradientUnits="userSpaceOnUse"  x1="210.901" y1="54.942" x2="76.385" y2="205.261">
+			<stop offset="0" stop-color="#ffb639"  />
+			<stop offset="1" stop-color="#ff541c"  />
+		</linearGradient>
+		<radialGradient id="grd2" gradientUnits="userSpaceOnUse"  cx="94.143" cy="43.743" r="107.613">
+			<stop offset="0" stop-color="#fff5c7"  />
+			<stop offset="0.156" stop-color="#ffdd4f"  />
+			<stop offset="1" stop-color="#ff7022"  />
+		</radialGradient>
+		<radialGradient id="grd3" gradientUnits="userSpaceOnUse"  cx="103.372" cy="54.814" r="20.652">
+			<stop offset="0" stop-color="#ffffff"  />
+			<stop offset="1" stop-color="#ffffff" stop-opacity="0" />
+		</radialGradient>
+		<radialGradient id="grd4" gradientUnits="userSpaceOnUse"  cx="49.343" cy="108.973" r="23.094">
+			<stop offset="0" stop-color="#ffffff"  />
+			<stop offset="1" stop-color="#ffffff" stop-opacity="0" />
+		</radialGradient>
+	</defs>
+	<style>
+		tspan { white-space:pre }
+		.shp0 { fill: url(#grd1) } 
+		.shp1 { fill: url(#grd2) } 
+		.shp2 { mix-blend-mode: overlay;fill: url(#grd3) } 
+		.shp3 { opacity: 0.4;mix-blend-mode: overlay;fill: url(#grd4) } 
+	</style>
+	<g id="&lt;Group&gt;">
+		<path id="&lt;Path&gt;" class="shp0" d="M141.06 126.98L124.29 128.09L121.14 144.59L105 139.89L96.39 154.32L82.84 144.38L69.81 155L60.47 141.03L44.6 146.54L40.61 130.22L23.8 129.98L25.63 113.27L9.92 107.3L17.36 92.22L4.64 81.23L16.78 69.61L8.59 54.94L23.97 48.17L21.29 31.59L38.06 30.48L41.22 13.98L57.35 18.68L65.96 4.25L79.52 14.18L92.54 3.57L101.88 17.54L117.75 12.02L121.75 28.35L138.55 28.59L136.72 45.29L152.43 51.27L145 66.34L157.71 77.33L145.58 88.95L153.77 103.63L138.39 110.39L141.06 126.98Z" />
+		<path id="&lt;Path&gt;" class="shp1" d="M24.49 79.28C24.49 110.59 49.87 135.97 81.18 135.97C112.49 135.97 137.87 110.59 137.87 79.28C137.87 47.98 112.49 22.6 81.18 22.6C49.87 22.6 24.49 47.98 24.49 79.28Z" />
+		<g id="&lt;Group&gt;">
+			<path id="&lt;Path&gt;" class="shp2" d="M89.82 73.45C75.38 61.73 69.74 43.91 77.22 33.61C84.71 23.32 102.49 24.48 116.93 36.18C131.36 47.89 137 65.73 129.52 76.02C122.02 86.32 104.25 85.16 89.82 73.45Z" />
+			<path id="&lt;Path&gt;" class="shp3" d="M31.07 91.81C32.99 85.54 42.71 88.14 52.8 97.62C62.89 107.09 69.51 119.85 67.61 126.13C65.7 132.39 55.97 129.8 45.88 120.32C35.8 110.84 29.17 98.07 31.07 91.81Z" />
+		</g>
+	</g>
+</svg>
