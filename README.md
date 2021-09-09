@@ -21,7 +21,7 @@
 
 - Hilt
 - Material
-- MVMV
+- MVVM
 
 ## Работоспособность
 
