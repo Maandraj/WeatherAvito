@@ -3,15 +3,35 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/TeachWeather/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.24444444444444444" />
+        <entry key="..\:/TeachWeather/app/src/main/res/drawable/background_gradient.xml" value="0.3638888888888889" />
+        <entry key="..\:/TeachWeather/app/src/main/res/drawable/blur.xml" value="0.35185185185185186" />
+        <entry key="..\:/TeachWeather/app/src/main/res/drawable/border_button.xml" value="0.18162393162393162" />
+        <entry key="..\:/TeachWeather/app/src/main/res/drawable/cloud_cover_icon.xml" value="0.35185185185185186" />
         <entry key="..\:/TeachWeather/app/src/main/res/drawable/glass.xml" value="0.20520833333333333" />
+        <entry key="..\:/TeachWeather/app/src/main/res/drawable/humidity_icon.xml" value="0.3574074074074074" />
+        <entry key="..\:/TeachWeather/app/src/main/res/drawable/ic__01_wind_1__3_.xml" value="0.3574074074074074" />
         <entry key="..\:/TeachWeather/app/src/main/res/drawable/ic_launcher_background.xml" value="0.22135416666666666" />
+        <entry key="..\:/TeachWeather/app/src/main/res/drawable/menu_card.xml" value="0.25" />
+        <entry key="..\:/TeachWeather/app/src/main/res/drawable/plain_icon.xml" value="0.2140625" />
         <entry key="..\:/TeachWeather/app/src/main/res/drawable/text_border.xml" value="0.21770833333333334" />
+        <entry key="..\:/TeachWeather/app/src/main/res/drawable/wind.xml" value="0.3574074074074074" />
+        <entry key="..\:/TeachWeather/app/src/main/res/drawable/wind_icon.xml" value="0.2203125" />
+        <entry key="..\:/TeachWeather/app/src/main/res/font/.xml" value="0.2197324414715719" />
+        <entry key="..\:/TeachWeather/app/src/main/res/font/amaranth_bold.xml" value="0.33794871794871795" />
+        <entry key="..\:/TeachWeather/app/src/main/res/layout-w1928dp/test.xml" value="0.20572916666666666" />
         <entry key="..\:/TeachWeather/app/src/main/res/layout/activity_main.xml" value="0.20520833333333333" />
+        <entry key="..\:/TeachWeather/app/src/main/res/layout/forecast_day_item.xml" value="0.20572916666666666" />
         <entry key="..\:/TeachWeather/app/src/main/res/layout/forecast_item.xml" value="0.33" />
-        <entry key="..\:/TeachWeather/app/src/main/res/layout/fragment_location.xml" value="0.20520833333333333" />
+        <entry key="..\:/TeachWeather/app/src/main/res/layout/forecast_item_today.xml" value="0.67" />
+        <entry key="..\:/TeachWeather/app/src/main/res/layout/forecast_today_item.xml" value="0.31197916666666664" />
+        <entry key="..\:/TeachWeather/app/src/main/res/layout/fragment_location.xml" value="0.33" />
         <entry key="..\:/TeachWeather/app/src/main/res/layout/fragment_weather.xml" value="0.33" />
+        <entry key="..\:/TeachWeather/app/src/main/res/layout/fragment_weather_days.xml" value="0.25" />
+        <entry key="..\:/TeachWeather/app/src/main/res/layout/fragment_weather_hours.xml" value="0.22" />
         <entry key="..\:/TeachWeather/app/src/main/res/layout/view_forecast_card.xml" value="0.19270833333333334" />
         <entry key="..\:/TeachWeather/app/src/main/res/layout/view_progress.xml" value="0.20520833333333333" />
+        <entry key="..\:/TeachWeather/app/src/main/res/mipmap-anydpi-v26/app_icon.xml" value="0.1683760683760684" />
       </map>
     </option>
   </component>

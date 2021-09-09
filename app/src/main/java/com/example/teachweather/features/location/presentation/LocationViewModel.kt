@@ -3,9 +3,9 @@ package com.example.teachweather.features.location.presentation
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.teachweather.di.LocationCredentials
+import com.example.teachweather.utils.LocationCredentials
 import com.example.teachweather.features.location.domain.LocationInteractor
-import com.example.teachweather.utills.asLiveData
+import com.example.teachweather.utils.asLiveData
 import com.google.android.libraries.places.api.model.Place
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

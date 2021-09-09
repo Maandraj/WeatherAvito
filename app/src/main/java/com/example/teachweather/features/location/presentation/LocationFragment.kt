@@ -15,9 +15,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
+//import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.teachweather.R
 import com.example.teachweather.databinding.FragmentLocationBinding
-import com.example.teachweather.di.LocationCredentials
+import com.example.teachweather.utils.LocationCredentials
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.Status
 import com.google.android.libraries.places.api.Places
@@ -49,8 +50,8 @@ class LocationFragment : Fragment(R.layout.fragment_location),
             viewModel.key,
             Locale.getDefault()
         )
-        if (LocationCredentials.cityApi == null)
-            openPhotoPicker()
+//        if (LocationCredentials.cityApi == null)
+           openPhotoPicker()
 
         autocompleteFragment =
             childFragmentManager.findFragmentById(R.id.autocomplete_fragment)

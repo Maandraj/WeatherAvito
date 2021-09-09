@@ -11,5 +11,5 @@ data class IceRes(
     @Json(name = "UnitType")
     val unitTypeRes: Int,
     @Json(name = "Value")
-    val valueRes: Int
+    val valueRes: Double
 )

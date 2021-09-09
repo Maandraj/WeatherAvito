@@ -5,7 +5,7 @@ import android.os.Bundle
 
 import androidx.navigation.fragment.NavHostFragment
 
-import com.example.teachweather.di.LocationCredentials
+import com.example.teachweather.utils.LocationCredentials
 
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,12 +23,11 @@ class MainActivity : AppCompatActivity() {
 
 
         navController.setGraph(
-            if (LocationCredentials.autoSave)
-                R.navigation.secured_graph
-            else if (LocationCredentials.keyCity == null  )
-                R.navigation.secured_graph
-            else
-                R.navigation.unsecured_graph
+            when {
+                LocationCredentials.autoSave -> R.navigation.secured_graph
+                LocationCredentials.keyCity == null -> R.navigation.secured_graph
+                else -> R.navigation.unsecured_graph
+            }
 
         )
     }

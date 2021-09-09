@@ -11,5 +11,5 @@ data class RainRes(
     @Json(name = "UnitType")
     val unitTypeRes: Int,
     @Json(name = "Value")
-    val valueRes: Int
+    val valueRes: Double
 )

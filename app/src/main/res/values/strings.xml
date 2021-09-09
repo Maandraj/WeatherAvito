@@ -5,7 +5,12 @@
     <string name="error_city_select">An error occurred while selecting a city.</string>
     <string name="please_select_city">Please select a city manually</string>
     <string name="auto_select_city">Auto select city ?</string>
-    <string name="glass_effect_card">Glass effect card</string>
-    <string name="card_background">Card background</string>
+    <string name="cloudy_cover">Cloudy cover</string>
+    <string name="humidity">Humidity</string>
+    <string name="wind">Wind</string>
+    <string name="today">Today</string>
+    <string name="updating">Edit</string>
+    <string name="days">days</string>
+
 
 </resources>

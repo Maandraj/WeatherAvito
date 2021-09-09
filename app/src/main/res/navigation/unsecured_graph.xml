@@ -6,6 +6,18 @@
 
     <fragment
         android:id="@+id/weatherFragment"
-        android:name="com.example.teachweather.features.weather.presentation.WeatherFragment"
-        android:label="WeatherFragment" />
+        android:name="com.example.teachweather.features.weather.presentation.WeatherHoursFragment"
+        android:label="WeatherFragment" >
+        <action
+            android:id="@+id/action_weatherFragment_to_weatherDaysFragment"
+            app:destination="@id/weatherDaysFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/weatherDaysFragment"
+        android:name="com.example.teachweather.features.weather.presentation.WeatherDaysFragment"
+        android:label="WeatherDaysFragment" >
+        <action
+            android:id="@+id/action_weatherDaysFragment_to_weatherFragment"
+            app:destination="@id/weatherFragment" />
+    </fragment>
 </navigation>

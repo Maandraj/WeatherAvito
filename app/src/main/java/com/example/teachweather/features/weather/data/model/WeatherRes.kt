@@ -11,7 +11,7 @@ data class WeatherRes(
     @Json(name = "DateTime")
     val dateTimeRes: String,
     @Json(name = "EpochDateTime")
-    val epochDateTimeRes: Int,
+    val epochDateTimeRes: Long,
     @Json(name = "Evapotranspiration")
     val evapotranspirationRes: EvapotranspirationRes,
     @Json(name = "HasPrecipitation")

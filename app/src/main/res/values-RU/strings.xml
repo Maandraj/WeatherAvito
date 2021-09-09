@@ -5,4 +5,11 @@
     <string name="error_city_select">Возникла ошибка при выборе города</string>
     <string name="please_select_city">Пожалуйста выберите город в ручную</string>
     <string name="auto_select_city">Выбрать город автоматически ?</string>
+    <string name="cloudy_cover">Облачность</string>
+    <string name="humidity">Осадки</string>
+    <string name="wind">Ветер</string>
+    <string name="today">Сегодня</string>
+    <string name="updating">Изменить</string>
+    <string name="days">дней</string>
+
 </resources>

@@ -43,3 +43,4 @@ class AppModel {
 }
 
 private const val OPENWEATHERM_API_BASE_URL = "http://dataservice.accuweather.com/"
+private const val API_KEY = "IOLwjfW0YevlydgRHGlmmJCvYRAOB1vK"
