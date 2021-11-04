@@ -35,4 +35,6 @@
 ![Demo](https://github.com/Maandraj/WeatherAvito/blob/weather/Demo.png?raw=false)
 
 
-Проект еще доробатывается :)
+
+
+Проект еще дорабатывается :)
