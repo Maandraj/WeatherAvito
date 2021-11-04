@@ -32,5 +32,6 @@
 
 ## Изображения
 ![Demo](https://i.ibb.co/ZHzhr9R/imgonline-com-ua-Auto-Enrich-suys-Dhw-DDwc-DHS.png "Demo")
+![Demo](https://github.com/Maandraj/WeatherAvito/blob/weather/Demo.png?raw=true)
 
 
