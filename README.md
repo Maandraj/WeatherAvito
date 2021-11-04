@@ -21,9 +21,14 @@
 
 - Hilt
 - MVVM
+- Clean architecture
 
 ## Работоспособность
+
 
 Для приложения используются бесплтаные ключи которые в свою очередь ограничены по запросам в день, для временного решения этой проблемы было созданно несколько ключей
 - acRKarlW4gg8iDT4VLZuAZwGM2CX2JrH
 - IOLwjfW0YevlydgRHGlmmJCvYRAOB1vK
+
+## Изображения
+![Demo](https://srv2.imgonline.com.ua/result_img/imgonline-com-ua-AutoEnrich-suysDhwDDwcDHS.png "Demo")
